@@ -13,5 +13,30 @@
         <maven.compiler.target>25</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    
+
+
+
+    <dependencies>
+
+        <dependency>
+            <groupId>com.github.lalyos</groupId>
+            <artifactId>jfiglet</artifactId>
+            <version>0.0.9</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-validator</groupId>
+            <artifactId>commons-validator</artifactId>
+            <version>1.11.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>it.kamaladafrica</groupId>
+            <artifactId>codice-fiscale</artifactId>
+            <version>1.6.0</version>
+        </dependency>
+
+
+    </dependencies>
+
 </project>

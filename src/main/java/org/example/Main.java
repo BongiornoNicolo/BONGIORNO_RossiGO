@@ -1,17 +1,41 @@
-package org.example;
+import org.example.*;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    static void main() {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        IO.println(String.format("Hello and welcome!"));
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            IO.println("i = " + i);
-        }
+static void main(String[] args) {
+
+    FlottaService flotta = new FlottaService();
+
+    try {
+        //Creiamo un veicolo con
+
+        Veicolo v1 = new Bici("MN-01", true, 12.0, 6);
+        flotta.registraVeicolo(v1);
+
+        // 3. Creiamo e registriamo un utente di prova
+        // (Assicurati di usare un codice fiscale formalmente valido per il test)
+        Utente u1 = new Utente("U001", "Mario Rossi", "mario@email.com", "RSSMRA80A01H501U", 1.50);
+        flotta.registraUtente(u1);
+
+        System.out.println("\nRegistrazioni completate con successo. Tentativo di sblocco in corso...");
+
+        // 4. Tentiamo di sbloccare il veicolo
+        // (Questo genererà un'eccezione perché l'utente ha solo 0.50€ di credito)
+        flotta.sbloccaVeicolo("MN-01", "U001");
+
+    } catch (CodiceFiscaleNonValidoException e) {
+        System.out.println("\nErrore di registrazione: " + e.getMessage());
+
+    } catch (CreditoInsufficienteException e) {
+        System.out.println("\nBlocco operazione: " + e.getMessage());
+
+    } catch (BatteriaScaricaException e) {
+        System.out.println("\nBlocco operazione: " + e.getMessage());
+
+    } catch (VeicoloNonDisponibileException e) {
+        System.out.println("\nBlocco operazione: " + e.getMessage());
+
+    } catch (Exception e) {
+        // Cattura generica per qualsiasi altro imprevisto
+        System.out.println("Errore imprevisto: " + e.getMessage());
     }
 }
